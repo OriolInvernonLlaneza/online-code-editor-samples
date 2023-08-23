@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>Embed Onirix Studio experiences</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+        </style>
+        <link rel="stylesheet" type="text/css" href="embed-experience.css">
+        <script type="module" defer src="firebase.js" ></script>
+        <script type="module" defer src="embed-experience.js" ></script>
+    </head>
+    <body>
+        <main id="oex-main" class="oex-main">
+            <img class="oex-logo" src="./assets/ox-logo.svg" />
+            <section id="oex-landing">
+                <img class="oex-exp" src="./assets/exp.webp" />
+                <h1>Welcome to Binball!</h1>
+                <p>Phasellus blandit leo ut odio. Praesent blandit laoreet nibh. Mauris sollicitudin fermentum libero.</p>
+                <p>Curabitur vestibulum aliquam leo. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. Quisque ut nisi.</p>
+                <div class="oex-button-area">
+                    <button id="oex-play" type="button">Play now</button>
+                </div>
+            </section>
+            <section class="oex-register-form oex-hide">
+                <h1>We need some info from you to play</h1>
+                <form>
+                    <div>
+                        <label>Name</label>
+                        <input id="oex-name" type="text" placeholder="How should we address you?" required />
+                    </div>
+                    <div>
+                        <label>Nickname</label>
+                        <input id="oex-nickname" type="text" placeholder="Your name on the leaderboard" required />
+                    </div>
+                    <div>
+                        <label>Corporate email</label>
+                        <input id="oex-email" type="email" placeholder="A corporate one is always better" required />
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input id="oex-password" type="password" minlength="6" required />
+                    </div>
+                    <div class="oex-checkbox">
+                        <input type="checkbox" required />
+                        <label>Accept the 
+                            <a target="_blank" href="https://www.onirix.com/es/politica-de-privacidad/">privacy policy</a> 
+                            and the <a href="https://www.onirix.com/es/condiciones-generales-contratacion/">Terms of use</a></label>
+                    </div>
+                    <div class="oex-checkbox">
+                        <input type="checkbox" id="oex-newsletter" />
+                        <label>I want to join the Newsletter and receive news and updates.</label>
+                    </div>
+                </form>
+                <div class="oex-button-area">
+                    <button type="button" id="oex-register">Let's get started</button>
+                    <p>Do you have an account? <a id="oex-gotologin">Login now</a></p>
+                </div>
+            </section>
+            <section class="oex-login-form oex-hide">
+                <h1>Login</h1>
+                <p>Enter your credentials to play again.</p>
+                <form>
+                    <div>
+                        <label>Email</label>
+                        <input id="oex-login-email" type="email" placeholder="example@onirix.com" required />
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input id="oex-login-password" type="password" minlength="6" required />
+                    </div>
+                </form>
+                <div class="oex-button-area">
+                    <button type="button" id="oex-login">Let's get started</button>
+                    <p>Don't you have an account? <a id="oex-gotoregister">Register now</a></p>
+                </div>
+            </section>
+            <section class="oex-leaderboard oex-hide">
+                <h1>Leaderboard</h1>
+                <p>This is your score at the moment</p>
+                <div class="oex-leaderboard__list">
+                </div>
+                <div class="oex-button-area">
+                    <button type="button" id="oex-playagain">Try again</button>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
