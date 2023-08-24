@@ -74,7 +74,7 @@ iframe {
 }
 
 .oex-leaderboard .oex-button-area {
-    margin: 0 -30px -15px -30px;
+    margin: auto -30px -15px -30px;
 }
 
 .oex-button-area p {
@@ -173,7 +173,7 @@ form p.oex-error {
     overflow-y: overlay;
     scrollbar-width: thin;
     scrollbar-color: transparent;
-    height: 100%;
+    height: calc(100% - 110px);
 }
 
 .oex-leaderboard__list::-webkit-scrollbar-track {
@@ -219,6 +219,7 @@ form p.oex-error {
 }
 
 .oex-leaderboard__list ul li:first-of-type {
+    margin-top: 0;
     background-color: #51007d;
     background-image: url('./assets/combined-shape.svg');
     background-position: center;

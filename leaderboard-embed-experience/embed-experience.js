@@ -2,7 +2,7 @@ import firebase from './firebase.js';
 
 let studioFrame;
 
-const experienceUrl = "https://studio.onirix.com/projects/0354dded25f4408299c674cba5e454df/webar?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0Mzc1LCJwcm9qZWN0SWQiOjUyMzgwLCJyb2xlIjozLCJpYXQiOjE2OTI2OTA3OTZ9.oMBouXpIcFscFVOc9O8ENDPTibmS-NosaEhcYqH6H-0";
+const experienceUrl = "https://studio.onirix.com/projects/8721b3088abb44ea83f87dd972e3b3b5/webar?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMjgwLCJwcm9qZWN0SWQiOjUyNDA1LCJyb2xlIjozLCJpYXQiOjE2OTI3MDUxMDF9.7OgQHOLBUGpnqHdMo_j29C2-okgyDqgWlQHSK13Qpl0&background=alpha&preview=false&hide_controls=false&ar_button=false";
 const firebaseController = new firebase.FirebaseController();
 let userData;
 let userCredential;
@@ -19,7 +19,6 @@ function loadExperience() {
         studioFrame.allow = "autoplay;camera;gyroscope;accelerometer;magnetometer;fullscreen;xr-spatial-tracking;geolocation;";
         document.body.appendChild(studioFrame);
     }
-    studioFrame.onload = () => setTimeout(() => studioFrame.contentWindow.postMessage(JSON.stringify(userData), "*"), 100);
     studioFrame.src = experienceUrl;
     main.classList.add("oex-hide");
 }
@@ -143,11 +142,20 @@ function processMessage(event) {
         return;
     }
 
-    if (!userData.score || userData.score < event.data.score) {
-        userData.score = event.data.score;
-        firebaseController.updateUser(userData).then(() => getLeaderboard().then());
+    if (event.data != null && event.data.score != null) {
+        if (!userData.score || userData.score < event.data.score) {
+            userData.score = event.data.score;
+            firebaseController.updateUser(userData).then(() => getLeaderboard().then());
+        } else {
+            getLeaderboard().then();
+        }
     } else {
-        getLeaderboard();
+        // First communication comes from the experience after it loads
+        // When loaded, send the user's data.
+        studioFrame.contentWindow.postMessage({
+            leaderboardEvent: 'sendUserData',
+            userData: JSON.stringify(userData)
+        }, "*");
     }
 }
 
